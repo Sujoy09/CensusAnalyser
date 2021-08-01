@@ -18,11 +18,10 @@ public class CensusAnalyser {
             csvToBeanBuilder.withType(IndiaCensusCSV.class);
             csvToBeanBuilder.withIgnoreLeadingWhiteSpace(true);
             CsvToBean<IndiaCensusCSV> csvToBean = csvToBeanBuilder.build();
-            Iterator<IndiaCensusCSV> censusCSVIterator = csvToBean.iterator();;
-            int namOfEateries = 0;
+            Iterator<IndiaCensusCSV> censusCSVIterator = csvToBean.iterator();
             Iterable<IndiaCensusCSV> csvIterable = () -> censusCSVIterator;
             int numOfEntries = (int) StreamSupport.stream(csvIterable.spliterator(), false).count();
-            return namOfEateries;
+            return numOfEntries;
         } catch (IOException e) {
             throw new CensusAnalyserException(e.getMessage(),
                                               CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM);
